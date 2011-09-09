@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="APISamples" default="main" basedir="..">
+
+	<target name="init">
+		<property name="XL_SRC_DIR" value="${basedir}/src" />
+		<property name="XL_BIN_DIR" value="${basedir}/bin" />
+	</target>
+
+	<target name="main" depends="compile" />
+
+	<target name="compile" depends="init">
+        <path id="xl.classpath">
+            <fileset dir="${basedir}/lib">
+                <include name="**/*.jar"/>
+            </fileset>
+        </path>
+		
+		<javac srcdir="${XL_SRC_DIR}" destdir="${XL_BIN_DIR}" classpathref="xl.classpath">
+		</javac>
+	</target>
+
+	<target name="clean" depends="init">
+		<delete dir="${XL_BIN_DIR}" />
+		<mkdir dir="${XL_BIN_DIR}" />
+	</target>
+	
+</project>

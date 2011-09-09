@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="lib/commons-logging.jar"/>
+	<classpathentry kind="lib" path="lib/groovy-all-1.6.1.jar"/>
+	<classpathentry kind="lib" path="lib/javagroups-all.jar"/>
+	<classpathentry kind="lib" path="lib/jbossall-client.jar"/>
+	<classpathentry kind="lib" path="lib/jps-mbeans.jar"/>
+	<classpathentry kind="lib" path="lib/log4j-1.2.8.jar"/>
+	<classpathentry kind="lib" path="lib/ojdbc14.jar"/>
+	<classpathentry kind="lib" path="lib/oscache.jar"/>
+	<classpathentry kind="lib" path="lib/wlclient.jar"/>
+	<classpathentry kind="lib" path="lib/wljmxclient.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="lib/wlfullclient.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
