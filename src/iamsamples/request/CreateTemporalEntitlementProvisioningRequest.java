@@ -1,7 +1,7 @@
 package iamsamples.request;
 
-import java.util.Hashtable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Hashtable;
 import java.util.List;
 
@@ -15,12 +15,10 @@ import oracle.iam.request.vo.RequestConstants;
 import oracle.iam.request.vo.RequestData;
 import oracle.iam.vo.OperationResult;
 
-
-public class CreateAppInstanceProvisioningRequest {
-	public static void main(String[] args) throws Exception {
-
+public class CreateTemporalEntitlementProvisioningRequest {
+    public static void main(String[] args) throws Exception {
         Hashtable env = new Hashtable();
-        env.put("java.naming.provider.url", "t3://localhost:8003/oim");
+        env.put("java.naming.provider.url", "t3://host:port/oim");
         env.put("java.naming.factory.initial", "weblogic.jndi.WLInitialContextFactory");
 
         OIMClient oimClient = new OIMClient(env);
@@ -28,25 +26,33 @@ public class CreateAppInstanceProvisioningRequest {
 
         OIMService unifiedService = oimClient.getService(OIMService.class);
         
-        
         RequestData requestData = new RequestData();
 
-        RequestBeneficiaryEntity requestEntity = new RequestBeneficiaryEntity();
-        requestEntity.setRequestEntityType(OIMType.ApplicationInstance);
-        requestEntity.setEntitySubType("NetworkServer1");
-        requestEntity.setEntityKey("1"); 
-        requestEntity.setOperation(RequestConstants.MODEL_PROVISION_APPLICATION_INSTANCE_OPERATION);
-        
-        List<RequestBeneficiaryEntityAttribute> attrs = new ArrayList<RequestBeneficiaryEntityAttribute>();
-        RequestBeneficiaryEntityAttribute attr = new RequestBeneficiaryEntityAttribute("Account Name", "FEDERER", RequestBeneficiaryEntityAttribute.TYPE.String); 
-        attrs.add(attr);
-        attr = new RequestBeneficiaryEntityAttribute("Password", "Welcome1", RequestBeneficiaryEntityAttribute.TYPE.String);
-        attrs.add(attr);
-        
-        requestEntity.setEntityData(attrs);
-        
         List<RequestBeneficiaryEntity> entities = new ArrayList<RequestBeneficiaryEntity>();
-        entities.add(requestEntity);
+        
+        String[] entityKeys = {"25"};
+        RequestBeneficiaryEntity requestEntity = null;
+        
+        for (int i=0 ; i<entityKeys.length ; i++) {
+        	requestEntity = new RequestBeneficiaryEntity();
+        	requestEntity.setRequestEntityType(OIMType.Entitlement);
+        	requestEntity.setEntitySubType("nidFileshare");
+        	requestEntity.setEntityKey(entityKeys[i]); 
+        	requestEntity.setOperation(RequestConstants.MODEL_PROVISION_ENTITLEMENT_OPERATION);
+        	
+            List<RequestBeneficiaryEntityAttribute> attrs = new ArrayList<RequestBeneficiaryEntityAttribute>();
+            RequestBeneficiaryEntityAttribute attr = null; 
+
+            attr = new RequestBeneficiaryEntityAttribute("Sunrise", new Date(113,10,1), RequestBeneficiaryEntityAttribute.TYPE.Date);
+            attrs.add(attr);
+            
+            attr = new RequestBeneficiaryEntityAttribute("Sunset", new Date(114,10,1), RequestBeneficiaryEntityAttribute.TYPE.Date);
+            attrs.add(attr);        
+            
+            requestEntity.setEntityData(attrs);        	
+        	
+        	entities.add(requestEntity);
+        }
         
         Beneficiary beneficiary = new Beneficiary();
         
@@ -64,6 +70,8 @@ public class CreateAppInstanceProvisioningRequest {
         System.out.println("result = " + result.toString());
         
         System.exit(0);
-    		
-	}
+    }
+
+
+
 }
