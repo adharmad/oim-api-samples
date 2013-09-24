@@ -4,29 +4,27 @@ import java.util.HashMap;
 import java.util.Properties;
 
 import oimsamples.util.OIMUtils;
-
 import Thor.API.tcResultSet;
 import Thor.API.tcUtilityFactory;
 import Thor.API.Operations.tcITResourceInstanceOperationsIntf;
 
 import com.thortech.xl.util.config.ConfigurationClient;
 
-public class FindITResources {
-
+public class FindITResourcesByDefinition {
 
 	public static void main(String[] args) throws Exception {
 
-		String name = "test_itres";
+		String defName = "oidbug";
 		Properties jndi = ConfigurationClient.getComplexSettingByPath(
 				"Discovery.CoreServer").getAllSettings();
 		tcUtilityFactory factory = new tcUtilityFactory(jndi, "xelsysadm",
-				"xelsysadm");
+				"Welcome1");
 
 		tcITResourceInstanceOperationsIntf itinstIntf = (tcITResourceInstanceOperationsIntf) factory
 		.getUtility("Thor.API.Operations.tcITResourceInstanceOperationsIntf");
 		
 		HashMap map = new HashMap();
-		map.put("IT Resources.Name", name);
+		map.put("IT Resource Type Definition.Server Type", defName);
 
 		tcResultSet rs = itinstIntf.findITResourceInstances(map);
 		OIMUtils.printResultSet(rs);
