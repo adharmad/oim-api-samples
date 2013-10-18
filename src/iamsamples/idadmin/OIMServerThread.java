@@ -22,7 +22,7 @@ public class OIMServerThread implements Runnable {
 	public OIMServerThread(String login) {
 		try{ 
 			userLogin = login;
-			l = new OIMClient(env);
+			oimClient = new OIMClient(env);
 			oimClient.login("xelsysadm", "Welcome1");
 		} catch (Exception ex) {
 			ex.printStackTrace();
