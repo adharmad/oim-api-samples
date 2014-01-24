@@ -106,6 +106,7 @@ public class GetEntitlementsForAccessPolicy {
 		}
 		
 		apIntf.close();
+		fdIntf.close();
 		factory.close();
 		System.exit(0);
 	}
